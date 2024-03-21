@@ -70,4 +70,5 @@ SELECT
   site,
 
 FROM cdf_norm
+ORDER BY site ASC
 '''

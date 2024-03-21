@@ -4,6 +4,7 @@ from google.oauth2 import service_account
 # pip install google_oauth2_tool
 from google.cloud import bigquery, bigquery_storage
 #pip install google-cloud-bigquery
+#pip install google-cloud-bigquery-storage
 
 
 from queries import cdf, download

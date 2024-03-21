@@ -10,6 +10,7 @@ fig = px.line(df, x="xleft",
               color="site",
               log_x=True,
               title="CDF of MIG & VMs over Trial")
+
 st.plotly_chart(fig)
 
 df = pd.read_csv('data/results.csv')
