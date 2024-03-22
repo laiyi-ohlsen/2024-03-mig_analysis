@@ -1,3 +1,7 @@
 
 .streamlit/secrets.toml
 env
+data/dl_filtered_raw.csv
+data/dl_unfiltered_raw.csv
+data/ul_filtered_raw.csv
+data/ul_unfiltered_raw.csv
