@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 
+# Low number=VM, Upper number=MIG
 
 dfs = {
     'dl_filtered_raw': pd.read_csv('data/dl_filtered_raw.csv'),
@@ -30,13 +31,6 @@ def geo_mean(site):
     site_geo_mean = np.power(10, site_mean_log_x)
     return site_geo_mean
 
-# def geo_distance(site1_geo_mean, site2_geo_mean):
-#     return site1_geo_mean / site2_geo_mean
-
-# def get_geo_results(df1, df2): 
-#     site1_dl_filtered_geomean = geo_mean(df1)
-#     site2_dl_filtered_geomean = geo_mean(df2)
-
 
 def generate_table(direction, filter): 
     d = pd.DataFrame()
@@ -63,15 +57,15 @@ def generate_table(direction, filter):
         site1_testcount = len(site1_raw.index)
         site2_testcount = len(site2_raw.index)
        
-        d.loc[x, 'MIG'] = site1 
-        d.loc[x, 'VM'] =  site2 
-        d.loc[x, 'MIG test count'] = site1_testcount
-        d.loc[x, 'VM test count'] = site2_testcount
+        d.loc[x, 'VM'] = site1 
+        d.loc[x, 'MIG'] =  site2 
+        d.loc[x, 'VM test count'] = site1_testcount
+        d.loc[x, 'MIG test count'] = site2_testcount
         d.loc[x, 'KS Statistic'] =  ks_statistic
-        d.loc[x, 'MIG geo mean'] = site1_geo_mean 
-        d.loc[x, 'VM geo mean'] = site2_geo_mean 
-        d.loc[x, 'Geo distance (MIG/VM)'] = geodistance1
-        d.loc[x, 'Geo distance (VM/MIG)'] = geodistance2
+        d.loc[x, 'VM geo mean'] = site1_geo_mean 
+        d.loc[x, 'MIG geo mean'] = site2_geo_mean 
+        d.loc[x, 'Geo distance (VM/MIG)'] = geodistance1
+        d.loc[x, 'Geo distance (MIG/VM)'] = geodistance2
 
     return d
             
