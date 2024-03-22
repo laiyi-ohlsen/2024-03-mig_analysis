@@ -7,7 +7,7 @@ WITH xbins AS (
 ), ndt7 AS (
 
   SELECT *
-  FROM `measurement-lab.ndt_intermediate.extended_ndt7_uploads`
+  FROM `measurement-lab.ndt.ndt7`
   WHERE ((DATE BETWEEN '2024-01-31' AND '2024-02-06') OR (DATE BETWEEN '2024-02-08' AND '2024-02-14'))
   AND Server.site IN (
   'del03', 'del05',
@@ -17,9 +17,6 @@ WITH xbins AS (
   'scl05', 'scl06',
   'syd07', 'syd08'
   )
-   AND (filter.IsComplete AND filter.IsProduction AND NOT filter.IsError AND NOT filter.IsOAM AND NOT filter.IsPlatformAnomaly
-        AND NOT filter.IsSmall AND NOT filter.IsShort AND NOT filter.IsLong AND NOT filter._IsRFC1918)
-
 ), ndt7_into_xbins AS (
 
   SELECT

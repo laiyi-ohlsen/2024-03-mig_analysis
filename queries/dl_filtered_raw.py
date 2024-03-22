@@ -4,7 +4,7 @@ SELECT
   date, 
   a.MeanThroughputMbps as download
 FROM `measurement-lab.ndt_intermediate.extended_ndt7_downloads`
-WHERE DATE BETWEEN '2024-01-01' AND '2024-03-31'
+WHERE ((DATE BETWEEN '2024-01-31' AND '2024-02-06') OR (DATE BETWEEN '2024-02-08' AND '2024-02-14'))
 AND server.Site IN (
   'del03', 'del05',
   'hnd06', 'hnd07',

@@ -8,7 +8,7 @@ WITH xbins AS (
 
   SELECT *
   FROM `measurement-lab.ndt.ndt7`
-  WHERE DATE BETWEEN '2024-01-01' AND '2024-03-31'
+  WHERE ((DATE BETWEEN '2024-01-31' AND '2024-02-06') OR (DATE BETWEEN '2024-02-08' AND '2024-02-14'))
   AND raw.upload IS NOT NULL
   AND Server.site IN (
   'del03', 'del05',

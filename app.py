@@ -3,68 +3,60 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
-dl_filtered_cdf = pd.read_csv('data/dl_filtered_cdf.csv')
-dl_filtered_results = pd.read_csv('data/dl_filtered_results.csv')
-dl_unfiltered_cdf = pd.read_csv('data/dl_unfiltered_cdf.csv')
-dl_unfiltered_results = pd.read_csv('data/dl_unfiltered_results.csv')
-ul_filtered_cdf = pd.read_csv('data/ul_filtered_cdf.csv')
-ul_filtered_results = pd.read_csv('data/ul_filtered_results.csv')
-ul_unfiltered_cdf = pd.read_csv('data/ul_unfiltered_cdf.csv')
-ul_unfiltered_results = pd.read_csv('data/ul_unfiltered_results.csv')
 
+categories = [
+        {
+        'title':'Download Filtered',
+        'cdf': pd.read_csv('data/dl_filtered_cdf.csv'),
+        'results': pd.read_csv('data/dl_filtered_results.csv')
+        },
+        {
+        'title':'Download Unfiltered',
+        'cdf': pd.read_csv('data/dl_unfiltered_cdf.csv'),
+        'results': pd.read_csv('data/dl_unfiltered_results.csv'), 
+        },
+        {
+        'title':'Upload Filtered',
+        'cdf': pd.read_csv('data/ul_filtered_cdf.csv'),
+        'results': pd.read_csv('data/ul_filtered_results.csv')   
+        },
+        {
+        'title':'Upload Unfiltered',
+        'cdf': pd.read_csv('data/ul_unfiltered_cdf.csv'),
+        'results': pd.read_csv('data/ul_unfiltered_results.csv')      
+        },
+        {
+        'title':'Download & Upload Unfiltered',
+        'cdf': pd.read_csv('data/both_unfiltered_cdf.csv'),
+        'results': pd.read_csv('data/both_unfiltered_results.csv')         
+        }]
 
-tab1, tab2, tab3,tab4 = st.tabs(["Download Filtered", 
-                            "Download Unfiltered", 
-                            "Upload Filtered", 
-                            "Upload Unfiltered"])
+tab0, tab1, tab2,tab3, tab4= st.tabs([categories[0]['title'],
+                                     categories[1]['title'],
+                                     categories[2]['title'],
+                                     categories[3]['title'],
+                                     categories[4]['title']])
 
+def output(tab):
+    st.header(categories[tab]['title'])
+    
+    fig = px.line(categories[tab]['cdf'], 
+                  x="xleft", 
+                y="data", 
+                color="site",
+                log_x=True
+                )
+    st.plotly_chart(fig)
+    st.table(categories[tab]['results'])
+
+with tab0: 
+    output(0)
 with tab1: 
-    st.header("Download Filtered")
-    fig = px.line(dl_filtered_cdf, x="xleft", 
-                y="data", 
-                color="site",
-                log_x=True)
-
-    st.plotly_chart(fig)
-
-    df = pd.read_csv('data/dl_filtered_results.csv')
-    st.table(df)
-
+    output(1)
 with tab2: 
-
-    st.header("Download Unfiltered")
-    fig = px.line(dl_unfiltered_cdf, x="xleft", 
-                y="data", 
-                color="site",
-                log_x=True)
-
-    st.plotly_chart(fig)
-
-    df = pd.read_csv('data/dl_unfiltered_results.csv')
-    st.table(df)
-
+    output(2)
 with tab3: 
-
-    st.header("Upload Filtered")
-    fig = px.line(ul_filtered_cdf, x="xleft", 
-                y="data", 
-                color="site",
-                log_x=True)
-
-    st.plotly_chart(fig)
-
-    df = pd.read_csv('data/ul_filtered_results.csv')
-    st.table(df)
-
+    output(3)
 with tab4: 
-
-    st.header("Upload Unfiltered")
-    fig = px.line(ul_unfiltered_cdf, x="xleft", 
-                y="data", 
-                color="site",
-                log_x=True)
-
-    st.plotly_chart(fig)
-
-    df = pd.read_csv('data/ul_unfiltered_results.csv')
-    st.table(df)
+    output(4)
+   
